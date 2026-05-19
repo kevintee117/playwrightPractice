@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/loginPage';
+
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
-  await page.fill('#user-name', 'standard_user');
-  await page.fill('#password', 'secret_sauce');
-  await page.click('#login-button');
+  const loginPage = new LoginPage(page);
+  await loginPage.login('standard_user', 'secret_sauce');
 });
 
 test('add item to cart', async ({ page }) => {
